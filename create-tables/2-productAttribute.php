@@ -22,20 +22,20 @@ $sql_create_table = "CREATE TABLE product_attributes (
 
 if ($conn->query($sql_create_table) === TRUE) {
   echo "Table created successfully<br />";
+
+  $sql_seed_data = "INSERT INTO product_attributes (product_id, attribute_name, attribute_values) VALUES
+                    (1, 'Color', '[\"Black\", \"White\", \"Yellow\"]'),
+                    (2, 'Size', '[\"SM\", \"MD\", \"LG\"]'),
+                    (1, 'Weight', '[\"1kg\", \"2kg\", \"3kg\"]'),
+                    (3, 'Material', '[\"Cotton\", \"Polyester\"]')";
+  
+  if ($conn->query($sql_seed_data) === TRUE) {
+    echo "Data inserted successfully<br />";
+  } else {
+    echo "Error while inserting data: " . $conn->error . "<br />";
+  }
 } else {
   echo "Error while creating table: " . $conn->error . "<br />";
-}
-
-$sql_seed_data = "INSERT INTO product_attributes (product_id, attribute_name, attribute_values) VALUES
-                  (1, 'Color', '[\"Black\", \"White\", \"Yellow\"]'),
-                  (2, 'Size', '[\"SM\", \"MD\", \"LG\"]'),
-                  (1, 'Weight', '[\"1kg\", \"2kg\", \"3kg\"]'),
-                  (3, 'Material', '[\"Cotton\", \"Polyester\"]')";
-
-if ($conn->query($sql_seed_data) === TRUE) {
-  echo "Data inserted successfully<br />";
-} else {
-  echo "Error while inserting data: " . $conn->error . "<br />";
 }
 
 $conn->close();

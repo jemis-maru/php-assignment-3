@@ -23,21 +23,21 @@ $sql_create_table = "CREATE TABLE products (
 
 if ($conn->query($sql_create_table) === TRUE) {
   echo "Table created successfully<br />";
+
+  $sql_seed_data = "INSERT INTO products (name, price, image, stock, status) VALUES
+                    ('Test', 9.5, 'test.jpg', 50, 0),
+                    ('Product 1', 10, 'product1.jpg', 100, 1),
+                    ('Product 2', 11, 'product2.jpg', 50, 1),
+                    ('Product 3', 12.51, 'product3.jpg', 75, 0),
+                    ('Product 4', 13, 'product4.jpg', 120, 1)";
+  
+  if ($conn->query($sql_seed_data) === TRUE) {
+    echo "Data inserted successfully<br />";
+  } else {
+    echo "Error while inserting data: " . $conn->error . "<br />";
+  }
 } else {
   echo "Error while creating table: " . $conn->error . "<br />";
-}
-
-$sql_seed_data = "INSERT INTO products (name, price, image, stock, status) VALUES
-                  ('Test', 9.5, 'test.jpg', 50, 0),
-                  ('Product 1', 10, 'product1.jpg', 100, 1),
-                  ('Product 2', 11, 'product2.jpg', 50, 1),
-                  ('Product 3', 12.51, 'product3.jpg', 75, 0),
-                  ('Product 4', 13, 'product4.jpg', 120, 1)";
-
-if ($conn->query($sql_seed_data) === TRUE) {
-  echo "Data inserted successfully<br />";
-} else {
-  echo "Error while inserting data: " . $conn->error . "<br />";
 }
 
 $conn->close();
