@@ -16,7 +16,7 @@ $sql_create_table = "
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     category_id INT(6) UNSIGNED,
     product_id INT(6) UNSIGNED,
-    FOREIGN KEY (category_id) REFERENCES categories(id),
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL,
     FOREIGN KEY (product_id) REFERENCES products(id)
   )
 ";
@@ -25,12 +25,10 @@ if ($conn->query($sql_create_table) === TRUE) {
   echo "Table created successfully<br />";
 
   $sql_seed_data = "INSERT INTO category_products (category_id, product_id) VALUES
-                        (1, 1),
                         (1, 2),
                         (2, 3),
                         (2, 4),
-                        (3, 5),
-                        (4, 1)
+                        (3, 5)
                     ";
 
   if ($conn->query($sql_seed_data) === TRUE) {
